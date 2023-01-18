@@ -131,7 +131,7 @@ export default ({ open, close }: { open: boolean, close: () => void }) => {
                                 <button type="button" onClick={() => _pswVisible(v => !v)} className="authForm-visToggle">{pswVisible ? visOff : vis}</button>
                                 <div className="authForm-error" role="alert">{errors.password && errors.password.message}</div>
                             </fieldset>
-                            <fieldset className="authForm-fieldset">
+                            <fieldset style={{padding: '0 110px'}} className="authForm-fieldset">
                                 <button type="submit" className="authForm-submitButton">Увійти</button>
                             </fieldset>
                         </div>,

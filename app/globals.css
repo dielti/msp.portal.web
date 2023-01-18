@@ -263,13 +263,13 @@ fieldset {
   height: 36px;
   width: 100%;
   font-weight: 700;
-  background-color: var(--accent);
+  background-color: var(--primary-button);
   line-height: 18px;
   color: #fff;
 }
 
 .authForm-submitButton:hover {
-  opacity: .8;
+  opacity: .9;
 }
 
 select.authForm-input {
@@ -400,7 +400,7 @@ select.authForm-input {
   top: 0;
   height: 46px;
   color: #fff;
-  background: var(--page-header);
+  background: var(--primary-button);
   border-top-right-radius: 23px;
   border-bottom-right-radius: 23px;
   font-size: 13px;
@@ -415,7 +415,7 @@ select.authForm-input {
 }
 
 .form-uploadButton:hover {
-  background-color: var(--page-header-highlighted);
+  opacity: .9;
 }
 
 .pdHeader {
