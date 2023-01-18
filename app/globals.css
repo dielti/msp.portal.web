@@ -165,9 +165,9 @@ fieldset {
 }
 
 .authForm-typeTab {
-  padding: 0 6px 10px;
+  padding: 0 6px 11px;
   text-align: center;
-  opacity: .8;
+  opacity: .7;
   font-weight: 500;
   width: 50%;
 }
@@ -180,7 +180,7 @@ fieldset {
 .authForm-typeSlider {
   background-color: var(--accent);
   position: absolute;
-  height: 3px;
+  height: 4px;
   width: 50%;
   transition: transform .2s ease;
   bottom: 0;
@@ -230,6 +230,7 @@ fieldset {
 .authForm-icon {
   right: 15px;
   top: 12px;
+  pointer-events: none;
 }
 
 .authForm-visToggle:hover {

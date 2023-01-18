@@ -93,7 +93,7 @@ export default ({ open, close }: { open: boolean, close: () => void }) => {
                 </div>
             </div>
             <div className="authForm-body">
-                <form style={{ width: '100%', margin: '20px 0' }} onSubmit={handleSubmit(onSubmit)}>
+                <form style={{ width: '100%', margin: '20px 0 12px' }} onSubmit={handleSubmit(onSubmit)}>
                     {{
                         0: <div>
                             <fieldset className="authForm-fieldset">
@@ -135,7 +135,7 @@ export default ({ open, close }: { open: boolean, close: () => void }) => {
                                 <button type="submit" className="authForm-submitButton">Увійти</button>
                             </fieldset>
                         </div>,
-                        1: <div>...авторазація за токеном</div>
+                        1: <div>...авторизація за токеном</div>
                     }[type]}
                 </form>
             </div>
