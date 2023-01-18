@@ -1,0 +1,14 @@
+:root {
+    --page-header: #333751;
+    --page-header-highlighted: #474d73;
+    --page-background: #e7e7e2;
+    --page-block: #fff;
+    --modal-border-radius: 16px;
+    --accent: #fcae35;
+    --secondary-input: #f7f7f7;
+    --separator: #00000033;
+    --separator-reg: #c6c6c6;
+    --secondary-2: #aaa;
+    --secondary-3: #737577;
+    --error: #ff5c5c;
+}

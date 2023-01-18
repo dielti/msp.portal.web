@@ -1,18 +1,25 @@
+import ClientLayout from './ClientLayout'
+import {cookies} from 'next/headers'
+import './fonts.css'
 import './globals.css'
+import './root.css'
 
-export default function RootLayout({
+export default async ({
   children,
 }: {
   children: React.ReactNode
-}) {
+}) => {
+  const auth = cookies().get('at')?.value
+
   return (
-    <html lang="en">
-      {/*
-        <head /> will contain the components returned by the nearest parent
-        head.tsx. Find out more at https://beta.nextjs.org/docs/api-reference/file-conventions/head
-      */}
+    <html>
       <head />
-      <body>{children}</body>
+      <body>
+        <ClientLayout auth={!!auth}>
+          <div id="modalWrap1" />
+          {children}
+        </ClientLayout>
+      </body>
     </html>
   )
 }
