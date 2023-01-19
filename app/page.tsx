@@ -1,5 +1,5 @@
 'use client'
 
 export default () => {
-  return <div>Головна</div>
+  return <div className="pageBlock">Головна</div>
 }

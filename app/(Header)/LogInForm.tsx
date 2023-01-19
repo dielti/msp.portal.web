@@ -117,16 +117,16 @@ export default ({ open, close }: { open: boolean, close: () => void }) => {
                                 <div className="authForm-error" role="alert">{errors.acsk && errors.acsk.message}</div>
                             </fieldset>
                             <fieldset className="authForm-fieldset">
-                                <div is-empty="false" style={{ paddingRight: 80 }} className="authForm-input animatedInput">
-                                    <input className="form-fileInput" type="file" {...rest} ref={e => { ref(e); e && (uploadButton.current = e) }} onChange={(e) => _fileName((e.target.files && e.target.files[0].name) || '')} />
+                                <div onClick={() => {uploadButton.current?.click()}} is-empty="false" style={{ paddingRight: 80 }} className="authForm-input animatedInput">
                                     <span>{fileName}</span>
                                 </div>
                                 <label className="animatedPlaceholder">Оберіть файл ключа</label>
-                                <button type="button" onClick={() => { uploadButton.current?.click() }} className="form-uploadButton">Обрати</button>
+                                <input className="form-fileInput" type="file" {...rest} ref={e => { ref(e); e && (uploadButton.current = e) }} onChange={(e) => _fileName((e.target.files && e.target.files[0].name) || '')} />
+                                <button type="button" onClick={() => {uploadButton.current?.click() }} className="form-uploadButton">Обрати</button>
                                 <div className="authForm-error" role="alert">{errors.keyFile && errors.keyFile.message}</div>
                             </fieldset>
                             <fieldset className="authForm-fieldset">
-                                <input is-empty={`${!getValues('password')}`} type={pswVisible ? "text" : "password"} placeholder='Пароль ключа' className="authForm-input animatedInput" {...register('password', { onChange: ({ target }) => { target.setAttribute("is-empty", !target.value) }, required: 'Необхідно ввести пароль' })} />
+                                <input is-empty='false' type={pswVisible ? "text" : "password"} placeholder='Пароль ключа' className="authForm-input animatedInput" {...register('password', { required: 'Необхідно ввести пароль' })} />
                                 <label className="animatedPlaceholder">Пароль ключа</label>
                                 <button type="button" onClick={() => _pswVisible(v => !v)} className="authForm-visToggle">{pswVisible ? visOff : vis}</button>
                                 <div className="authForm-error" role="alert">{errors.password && errors.password.message}</div>
