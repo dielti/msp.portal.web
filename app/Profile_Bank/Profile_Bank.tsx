@@ -1,23 +1,23 @@
 'use client'
 
-import { AdapterMoment } from "@mui/x-date-pickers/AdapterMoment"
-import { DatePicker } from "@mui/x-date-pickers/DatePicker"
-import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider"
-import 'moment/locale/uk'
 import moment, { Moment } from "moment"
 import { useState, useEffect, useRef, Ref } from "react"
 import { useForm } from "react-hook-form"
-import { calendar, expand, search } from "../icons"
-import { opfu, payrollStatuses, prTypes, services, sources } from './data'
+import { calendar, expand, search, upload } from "../icons"
+import { opfu, payrollStatuses, prcCodes, prTypes, services, sources } from './data'
+import DateField from "../(FormComponents)/DateField"
+import SelectField from "../(FormComponents)/SelectField"
+import TextField from "../(FormComponents)/TextField"
 
-const items = [{
-    PR_NAME: 'Відомість на зарахування субсидій',
-    PAY_YEAR: '2022',
-    PAY_MONTH: 'Серпень',
-    PR_SUM: '517.87',
-    PR_ROW_CNT: '9',
-    PR_STATUS: 'Отримано банком/поштою'
-}],
+const items = [[[
+    'Відомість на зарахування субсидій',
+    '2022',
+    'Серпень',
+    '517.87',
+    '9',
+    'Отримано банком/поштою'
+]], [['454', '12.12.2012', 8, '415.86'], ['545', '11.11.2013', 3, '212.00']],
+[['233','30.01.2019','9500.00','2','Завантажено']]],
     tabs = [['Назва відомості', 'Рік', 'Місяць', 'Загальна сума', 'Загальна кількість рядків', 'Статус'], ['Номер платіжного доручення', 'Дата проведення платіжного доручення', 'Кількість виплатних відомостей', 'Сума'], ['Номер платіжного доручення', 'Дата платіжного доручення', 'Загальна сума платіжного доручення', 'Загальна кількість рядків в файлі', 'Статус']]
 
 type FormValues = {
@@ -34,10 +34,7 @@ type FormValues = {
 export default () => {
     const [type, _type] = useState(0),
         [searched, _searched] = useState(!1),
-        [date1, _date1] = useState<Moment | null>(null),
-        [date2, _date2] = useState<Moment | null>(null),
-        [dp1, _dp1] = useState(!1),
-        [dp2, _dp2] = useState(!1),
+        formRef = useRef<HTMLFormElement>(null),
         { register, getValues, handleSubmit, setError, formState: { errors }, reset } = useForm<FormValues>({ mode: 'onSubmit' }),
         onSubmit = (data: any, e?: React.BaseSyntheticEvent) => {
             e?.preventDefault()
@@ -45,95 +42,86 @@ export default () => {
         }
 
     useEffect(() => {
+        formRef.current?.reset()
         _searched(!1)
     }, [type])
 
     return <>{[<div key={1} className="pageBlock">
         <div className="pageBlock-head">
-            <div className="pageBlock-header">Кабінет спеціаліста банку/пошти</div>
+            <div className="pageBlock-header">Кабінет спеціаліста банку</div>
             <div className="pageBlock-tabs">
                 <button className={`pageBlock-tab${type == 0 ? ' active' : ''}`} onClick={() => _type(0)}>Виплатні відомості</button>
-                <button className={`pageBlock-tab${type == 1 ? ' active' : ''}`} onClick={() => _type(1)}>Платіжні доручення від ПФУ</button>
-                <button className={`pageBlock-tab${type == 2 ? ' active' : ''}`} onClick={() => _type(2)}>Повернення коштів в ПФУ</button>
+                <button className={`pageBlock-tab${type == 1 ? ' active' : ''}`} onClick={() => _type(1)}>Платіжні доручення</button>
+                <button className={`pageBlock-tab${type == 2 ? ' active' : ''}`} onClick={() => _type(2)}>Повернення коштів</button>
                 <div style={{ transform: `translateX(${100 * type}%)`, width: '33.33%' }} className="pageBlock-slider" />
             </div>
         </div>
-        <div style={{ marginTop: 20 }} className="pageBlock-body">
+        <div style={{ marginTop: 0 }} className="pageBlock-body">
+            <form ref={formRef} onSubmit={handleSubmit(onSubmit)}>
             {{
-                0: <form onSubmit={handleSubmit(onSubmit)} style={{ display: 'flex', flexWrap: 'wrap' }}>
+                0: <div className="row">
                     <div className="col-md-6">
-                        <fieldset className="searchForm-fieldset">
-                            <LocalizationProvider adapterLocale='uk' dateAdapter={AdapterMoment}><DatePicker inputFormat="DD.MM.yyyy" onClose={() => _dp1(!1)} value={date1} open={dp1} onChange={v => _date1(v)} renderInput={({ inputProps, inputRef, InputProps }) => <input ref={inputRef} className="searchForm-input" {...inputProps} placeholder='__.__.____'/>} /></LocalizationProvider>
-                            <button type="button" onClick={() => { _dp1(v => !v) }} style={{ paddingTop: 1 }} className="form-uploadButton">{calendar}</button>
-                            <label className="searchForm-label">Дата виплати з</label>
-                            {/* <div className="authForm-error" role="alert">{errors.password && errors.password.message}</div> */}
-                        </fieldset>
-                        <fieldset className="searchForm-fieldset">
-                            <select defaultValue='' className="searchForm-input">
-                                <option value='' />
-                                {opfu.map(({ Code, Caption }, key) => <option value={Code} key={key}>{Caption}</option>)}
-                            </select>
-                            <label className="searchForm-label">ОПФУ</label>
-                            <div className="authForm-icon">{expand}</div>
-                            {/* <div className="authForm-error" role="alert">{errors.password && errors.password.message}</div> */}
-                        </fieldset>
-                        <fieldset className="searchForm-fieldset">
-                            <select defaultValue='' className="searchForm-input">
-                                <option value='' />
-                                {services.map(({ value, caption }, key) => <option value={value} key={key}>{caption}</option>)}
-                            </select>
-                            <label className="searchForm-label">Послуга</label>
-                            <div className="authForm-icon">{expand}</div>
-                            {/* <div className="authForm-error" role="alert">{errors.password && errors.password.message}</div> */}
-                        </fieldset>
-                        <fieldset className="searchForm-fieldset">
-                            <select defaultValue='' className="searchForm-input">
-                                <option value='' />
-                                {payrollStatuses.map(({ value, caption }, key) => <option value={value} key={key}>{caption}</option>)}
-                            </select>
-                            <label className="searchForm-label">Статус відомості</label>
-                            <div className="authForm-icon">{expand}</div>
-                            {/* <div className="authForm-error" role="alert">{errors.password && errors.password.message}</div> */}
-                        </fieldset>
+                        <DateField label="Дата виплати з" />
                     </div>
                     <div className="col-md-6">
-                        <fieldset className="searchForm-fieldset">
-                            <LocalizationProvider adapterLocale='uk' dateAdapter={AdapterMoment}><DatePicker inputFormat="DD.MM.yyyy" onClose={() => _dp2(!1)} value={date2} open={dp2} onChange={v => _date2(v)} renderInput={({ inputProps, inputRef, InputProps }) => <input ref={inputRef} className="searchForm-input" {...inputProps} placeholder='__.__.____'/>} /></LocalizationProvider>
-                            <button type="button" onClick={() => { _dp2(v => !v) }} style={{ paddingTop: 1 }} className="form-uploadButton">{calendar}</button>
-                            <label className="searchForm-label">Дата виплати по</label>
-                            {/* <div className="authForm-error" role="alert">{errors.password && errors.password.message}</div> */}
-                        </fieldset>
-                        <fieldset className="searchForm-fieldset">
-                            <select defaultValue='' className="searchForm-input">
-                                <option value='' />
-                                {prTypes.map(({ value, caption }, key) => <option value={value} key={key}>{caption}</option>)}
-                            </select>
-                            <label className="searchForm-label">Тип відомості</label>
-                            <div className="authForm-icon">{expand}</div>
-                            {/* <div className="authForm-error" role="alert">{errors.password && errors.password.message}</div> */}
-                        </fieldset>
-                        <fieldset className="searchForm-fieldset">
-                            <select defaultValue='' className="searchForm-input">
-                                <option value='' />
-                                {sources.map(({ value, caption }, key) => <option value={value} key={key}>{caption}</option>)}
-                            </select>
-                            <label className="searchForm-label">Джерело</label>
-                            <div className="authForm-icon">{expand}</div>
-                            {/* <div className="authForm-error" role="alert">{errors.password && errors.password.message}</div> */}
-                        </fieldset>
-                        <fieldset className="searchForm-fieldset">
-                            <input is-empty='false' type='text' placeholder='' className="searchForm-input" />
-                            <label className="searchForm-label">Ідентифікатор пакета</label>
-                            {/* <div className="authForm-error" role="alert">{errors.password && errors.password.message}</div> */}
-                        </fieldset>
+                        <DateField label="Дата виплати по" />
+                    </div>
+                    <div className="col-md-6">
+                        <SelectField label='ОПФУ' value='Code' caption='Caption' options={opfu} emptyDefault={true} />
+                    </div>
+                    <div className="col-md-6">
+                        <SelectField label="Тип відомості" options={prTypes} emptyDefault={true} />
+                    </div>
+                    <div className="col-md-6">
+                        <SelectField label='Послуга' options={services} emptyDefault={true} />
+                    </div>
+                    <div className="col-md-6">
+                        <SelectField label="Джерело" options={sources} emptyDefault={true} />
+                    </div>
+                    <div className="col-md-6">
+                        <SelectField label='Статус відомості' options={payrollStatuses} emptyDefault={true} />
+                    </div>
+                    <div className="col-md-6">
+                        <TextField label='Ідентифікатор пакета' />
                     </div>
                     <fieldset className="searchForm-fieldset searchForm-buttons">
                         <button type='submit' className="searchForm-button">{search}Пошук</button>
                     </fieldset>
-                </form>,
-                1: <div>Потім</div>,
-                2: <div>Теж потім</div>
+                </div>,
+                1: <div className="row">
+                    <div className="col-md-6">
+                        <DateField label='Дата платіжного доручення з' />
+                    </div>
+                    <div className="col-md-6">
+                        <DateField label='Дата платіжного доручення по' />
+                    </div>
+                    <div className="col-md-6">
+                        <SelectField label='Статус реєстру виплатних відомостей' options={[{ value: 1, caption: 'відправлено' }, { value: 2, caption: 'отримано банком' }]} emptyDefault={!0} />
+                    </div>
+                    <div className="col-md-6">
+                        <SelectField label='Результат опрацювання Реєстру виплатних відомостей' options={prcCodes} emptyDefault={!0} value='Id' caption="Caption" />
+                    </div>
+                    <fieldset className="searchForm-fieldset searchForm-buttons">
+                        <button type='submit' className="searchForm-button">{search}Пошук</button>
+                    </fieldset>
+                </div>,
+                2: <div className="row">
+                    <div className="col-md-6">
+                        <DateField label='Дата платіжного доручення з' />
+                    </div>
+                    <div className="col-md-6">
+                        <DateField label='Дата платіжного доручення по' />
+                    </div>
+                    <div className="col-md-6">
+                        <SelectField label='Статус реєстра повернених коштів' options={[{ value: 1, caption: 'Завантажено' }, { value: 2, caption: 'Знайдено ПД' }, { value: 3, caption: 'Помилка суми' }, { value: 4, caption: 'Оброблено' }]} emptyDefault={!0}/>
+                    </div>
+                    <fieldset className="searchForm-fieldset searchForm-buttons">
+                        <button type="button" className="searchForm-button" style={{width: 186}}>{upload}Додати файл</button>
+                        <button type='submit' className="searchForm-button">{search}Пошук</button>
+                    </fieldset>
+                </div>
             }[type]}
+            </form>
         </div>
     </div>,
     <div key={2} style={{ marginTop: 24 }} className='pageBlock'>
@@ -146,16 +134,13 @@ export default () => {
             <thead className="searchResults-head">
                 <tr>
                     {tabs[type].map((v, key) => <th key={key}>{v}</th>)}
+                    <th style={{ width: 70 }} />
                 </tr>
             </thead>
             <tbody className="searchResults-body">
-                {searched && items.map(({ PR_NAME, PAY_YEAR, PAY_MONTH, PR_SUM, PR_STATUS, PR_ROW_CNT }, key) => <tr key={key}>
-                    <td>{PR_NAME}</td>
-                    <td>{PAY_YEAR}</td>
-                    <td>{PAY_MONTH}</td>
-                    <td>{PR_SUM}</td>
-                    <td>{PR_ROW_CNT}</td>
-                    <td>{PR_STATUS}</td>
+                {searched && items[type].map((v, key) => <tr key={key}>
+                    {v.map((v, key) => <td key={key}>{v}</td>)}
+                    <td style={{ paddingTop: 2 }}>{expand}</td>
                 </tr>)}
             </tbody>
         </table>
