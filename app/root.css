@@ -5,6 +5,7 @@
     --page-block: #fff;
     --modal-border-radius: 16px;
     --accent: #dbbe7a;
+    --accent: #d4ae52;
     --ui-accent: #638bb8;
     --secondary-input: #f7f7f7;
     --separator: #00000033;
@@ -13,4 +14,5 @@
     --secondary-3: #737577;
     --error: #ff5c5c;
     --primary-button: #4c516d;
+    --standard-fonts: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Helvetica Neue", Arial, Helvetica, sans-serif;
 }
