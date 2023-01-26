@@ -21,9 +21,22 @@ export default ({ children, auth }: { children: React.ReactNode, auth: boolean }
                 </div>
                 <div className="pageFooter-wrap">
                     <div className="pageFooter-content">
-                        <a className="textLink" target="_blank" href="https://www.msp.gov.ua/">msp.gov.ua</a><br/>
-                        © 2016-2023 Міністерство соціальної політики України<br/>
-                        Розробник: ТОВ "Медирент"
+                        <div className="pageFooter-block">
+                            <a target='_blank' href='https://www.msp.gov.ua/'>© 2023, Міністерство соціальної політики України</a>
+                            <div>Розробник: ТОВ "Медирент"</div>
+                        </div>
+                        <table className="contactsTable">
+                            <tbody>
+                                <tr>
+                                    <td><a href='mailto:info@mlsp.gov.ua'>info@mlsp.gov.ua</a></td>
+                                    <td><span className="small">тел.</span>(044) 289-86-22</td>
+                                </tr>
+                                <tr>
+                                    <td>м. Київ, вул. Еспланадна, 8/10</td>
+                                    <td><span className="small">тел.</span>(044) 289-70-60</td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>

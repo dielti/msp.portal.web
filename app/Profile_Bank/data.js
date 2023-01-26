@@ -2,7 +2,7 @@ export const opfu = [{"Id":"1001","Code":"28000","Name":"Тестова Уста
 
 export const services = [{value: '1', caption: 'Пенсії'},{value: '2', caption: 'Пільги'},{value: '3', caption: 'Субсидії'},{value: '4', caption: 'Регрес'},{value: '5', caption: 'Лікарняні'},]
 
-export const payrollStatuses = [{value: '1', caption: 'Передано в банк/Укрпошті'},{value: '2', caption: 'Отримано банком/Укрпоштою'},{value: '3', caption: 'Платіж проведено'}]
+export const payrollStatuses = [{value: '1', caption: 'Передано в банк'},{value: '2', caption: 'Отримано банком'},{value: '3', caption: 'Платіж проведено'}]
 
 export const prTypes = [{value: '1', caption: 'Основна'},{value: '2', caption: 'Додаткова - пенсії'},{value: '3', caption: 'Коригуюча - пенсії'}]
 

@@ -4,6 +4,7 @@ import dynamic from "next/dynamic"
 import Link from "next/link"
 import { useContext } from "react"
 import { LoadedContext, UserContext } from "../Contexts"
+import { accessibility } from "../icons"
 
 //@ts-ignore
 const NoAuthBlock = dynamic(() => import('./NoAuthBlock'), { ssr: false })
@@ -21,6 +22,7 @@ export default () => {
             </Link>
             <div style={{ flexGrow: 1 }} />
             <div className="pageHeader-personal">
+                <button className="accButton">{accessibility}Для людей з<br/>порушенням зору</button>
                 {loaded && (user ? <AuthBlock /> : <NoAuthBlock />)}
             </div>
         </div>

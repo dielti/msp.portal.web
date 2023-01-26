@@ -6,10 +6,10 @@
 
 body {
   background-color: var(--page-background);
-  font-size: 14px;
+  font-size: 12px;
   margin: 0;
   box-sizing: border-box;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Helvetica Neue", Arial, Helvetica, sans-serif;
+  font-family: var(--eUkraine), -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Helvetica Neue", Arial, Helvetica, sans-serif;
 }
 
 a {
@@ -46,7 +46,7 @@ input,
 optgroup,
 select,
 textarea {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Helvetica Neue", Arial, Helvetica, sans-serif;
+  font-family: var(--eUkraine), -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Helvetica Neue", Arial, Helvetica, sans-serif;
   font-size: 100%;
   line-height: 1.15;
   margin: 0;
@@ -70,15 +70,26 @@ fieldset {
   background-color: #232629;
   width: 100%;
   margin-top: 30px;
+  height: 80px;
 }
 
 .pageFooter-content {
   width: 1200px;
+  height: 100%;
   margin: 0 auto;
   padding: 16px 0;
   line-height: 20px;
-  text-align: center;
   color: #e0e0e0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.pageFooter-block {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  height: 100%;
 }
 
 .modalWrap {
@@ -132,9 +143,10 @@ fieldset {
 
 .authButton {
   height: 60px;
-  font-weight: 700;
+  font-weight: 500;
   line-height: 16px;
-  font-size: 16px;
+  font-size: 14px;
+  margin-left: 20px;
 }
 
 .authButton:hover {
@@ -273,7 +285,7 @@ fieldset {
 
 .authForm-error {
   color: var(--error);
-  font-size: 13px;
+  font-size: 11px;
   padding-left: 16px;
   line-height: 16px;
   margin-top: 4px;
@@ -294,7 +306,7 @@ fieldset {
 
 .authForm-submitButton {
   border-radius: 18px;
-  font-size: 16px;
+  font-size: 14px;
   height: 36px;
   width: 100%;
   font-weight: 700;
@@ -336,13 +348,14 @@ select.authForm-input, select.searchForm-input {
 .animatedInput:active+.animatedPlaceholder,
 .animatedInput:focus+.animatedPlaceholder,
 .animatedInput[is-empty=false]+.animatedPlaceholder {
-  font-size: 12px;
+  font-size: 10px;
   line-height: 16px;
   transform: translateY(-10px);
 }
 
 .pageHeader-personal {
   height: 60px;
+  display: flex;
   position: relative;
 }
 
@@ -380,12 +393,11 @@ select.authForm-input, select.searchForm-input {
 
 .pageHeader-pdItem {
   width: 100%;
-  padding: 12px 15px 13px 50px;
+  padding: 13px 15px 13px 50px;
   text-align: left;
   display: block;
-  font-size: 15px;
-  line-height: 15px;
-  font-weight: 500;
+  font-size: 13px;
+  line-height: 13px;
   color: #555;
   position: relative;
 }
@@ -425,7 +437,7 @@ select.authForm-input, select.searchForm-input {
 
 .pageBody {
   width: 1200px;
-  min-height: calc(100vh - 182px);
+  min-height: calc(100vh - 170px);
   margin: 60px auto 0;
   display: flex;
   padding: 15px 16px 0;
@@ -440,7 +452,7 @@ select.authForm-input, select.searchForm-input {
   background: var(--primary-button);
   border-top-right-radius: 23px;
   border-bottom-right-radius: 23px;
-  font-size: 13px;
+  font-size: 11px;
   padding-right: 20px;
   padding-left: 15px;
   max-width: 80px;
@@ -461,29 +473,61 @@ select.authForm-input, select.searchForm-input {
   color: #000;
   border-bottom: solid 1px #d6d6d6;
   padding-left: 15px;
-  font-size: 14px;
+  font-size: 12px;
 }
 
 .pageSidebar-wrap {
-  width: 200px;
+  overflow-x: hidden;
   margin-right: 10px;
+  margin-left: -10px;
+  position: relative;
+}
+
+.pageSidebar-wrap.animated > * {
+  transition: transform 200ms ease, visibility 200ms ease;
+}
+
+.pageSidebar-mainMenu, .pageSidebar-subMenu {
+  width: 280px;
+}
+
+.pageSidebar-mainMenu.translated {
+  transform: translateX(-100%);
+  visibility: hidden;
+}
+
+.pageSidebar-itemWrap>.pageSidebar-item {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.pageSidebar-subMenu {
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 3;
+  visibility: hidden;
+  transform: translateX(100%);
+}
+
+.pageSidebar-subMenu.visible {
+  visibility: visible;
+  transform: translateX(0);
 }
 
 .pageSidebar-item {
-  height: 44px;
+  min-height: 44px;
   padding: 0px 10px;
   display: flex;
   align-items: center;
   cursor: pointer;
-  font-size: 15px;
-  line-height: 15px;
-  font-weight: 500;
+  font-size: 14px;
+  line-height: 14px;
   border-radius: 8px;
-  margin-left: -10px;
   color: #202020;
 }
 
-.pageSidebar-item:hover {
+.pageSidebar-item:hover, .pageSidebar-itemWrap:hover>.pageSidebar-item {
   background-color: #fff;
 }
 
@@ -492,7 +536,19 @@ select.authForm-input, select.searchForm-input {
 }
 
 .pageSidebar-item svg {
-  margin-right: 10px;
+  margin-right: 12px;
+  min-width: 24px;
+}
+
+.pageSidebar-item svg:not(:first-child) {
+  margin-right: 0;
+  margin-left: auto;
+}
+
+.pageSidebar-itemText {
+  flex: 1;
+  line-height: 20px;
+  padding: 6px 0;
 }
 
 .pageBlock {
@@ -509,9 +565,10 @@ select.authForm-input, select.searchForm-input {
 }
 
 .pageBlock-header {
-  font-size: 20px;
+  font-size: 18px;
   font-weight: 500;
-  padding: 10px 0
+  padding: 12px 0;
+  font-family: var(--eUkraineHead);
 }
 
 .pageBlock-tabs {
@@ -572,7 +629,7 @@ select.authForm-input, select.searchForm-input {
     left: 16px;
     pointer-events: none;
     color: var(--secondary-3);
-    font-size: 12px;
+    font-size: 10px;
     line-height: 16px;
     transform: translateY(-12px);
 }
@@ -584,7 +641,7 @@ select.authForm-input, select.searchForm-input {
 
 .searchForm-button {
   border-radius: 18px;
-  font-size: 16px;
+  font-size: 13.5px;
   height: 36px;
   position: relative;
   width: 170px;
@@ -619,7 +676,6 @@ select.authForm-input, select.searchForm-input {
 .searchResults-head {
   background-color: #5f6379;
   color: #fff;
-  font-weight: 500;
 }
 
 .searchResults-head th {
@@ -639,7 +695,6 @@ select.authForm-input, select.searchForm-input {
 .searchResults-body tr {
   height: 85px;
   cursor: pointer;
-  font-weight: 500;
   font-size: 13px;
 }
 
@@ -663,6 +718,50 @@ select.authForm-input, select.searchForm-input {
 
 .showcase:not(:last-child) {
   margin-bottom: 24px;
+}
+
+.accButton {
+  display: flex;
+  margin: 10px 0;
+  padding: 0 6px 1px;
+  margin-right: 10px;
+  align-items: center;
+  text-align: left;
+  border-radius: 10px;
+  border: solid 1px #fff;
+  line-height: 15px;
+  font-weight: 500;
+  font-size: 11px;
+  transition: all .5s ease;
+}
+
+.accButton:hover {
+  background-color: #fff;
+  color: var(--page-header);
+}
+
+.accButton svg {
+  display: block;
+  margin-right: 8px;
+  margin-bottom: -1px;
+}
+
+.contactsTable {
+  text-align: right;
+}
+
+.contactsTable td:not(:last-child) {
+  padding-right: .7rem;
+}
+
+.pageFooter-content a:hover {
+  text-decoration: underline;
+}
+
+.small {
+  opacity: .8;
+  font-size: 11px;
+  margin-right: 6px;
 }
 
 @media all and (max-width: 1200px) {

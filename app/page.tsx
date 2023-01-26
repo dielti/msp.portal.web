@@ -1,6 +1,7 @@
 'use client'
 
 export default () => {
+  return <div>...</div>
   return <>{[<div key={1} className="pageBlock showcase">
     <div className="pageBlock-head">
       <div className="pageBlock-header">Надавачу соціальних послуг</div>
