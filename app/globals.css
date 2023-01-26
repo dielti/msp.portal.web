@@ -501,11 +501,6 @@ select.authForm-input, select.searchForm-input {
   visibility: hidden;
 }
 
-.pageSidebar-itemWrap>.pageSidebar-item {
-  border-top-right-radius: 0;
-  border-bottom-right-radius: 0;
-}
-
 .pageSidebar-subMenu {
   position: absolute;
   left: 0;
@@ -526,13 +521,13 @@ select.authForm-input, select.searchForm-input {
   display: flex;
   align-items: center;
   cursor: pointer;
-  font-size: 14px;
+  font-size: 13px;
   line-height: 14px;
   border-radius: 8px;
   color: #202020;
 }
 
-.pageSidebar-item:hover, .pageSidebar-itemWrap:hover>.pageSidebar-item {
+.pageSidebar-item:hover {
   background-color: #fff;
 }
 
