@@ -1,7 +1,6 @@
 'use client'
 
-import moment, { Moment } from "moment"
-import { useState, useEffect, useRef, Ref } from "react"
+import { useState, useEffect, useRef } from "react"
 import { useForm } from "react-hook-form"
 import { calendar, expand, search, upload } from "../icons"
 import { opfu, payrollStatuses, prcCodes, prTypes, services, sources } from './data'
@@ -46,9 +45,9 @@ export default () => {
         _searched(!1)
     }, [type])
 
-    return <>{[<div key={1} className="pageBlock">
+    return <>{[<div className="page-header" key={0}>Кабінет спеціаліста банку</div>,<div key={1} className="pageBlock">
         <div className="pageBlock-head">
-            <div className="pageBlock-header">Кабінет спеціаліста банку</div>
+            <div className="pageBlock-header">Параметри пошуку</div>
             <div className="pageBlock-tabs">
                 <button className={`pageBlock-tab${type == 0 ? ' active' : ''}`} onClick={() => _type(0)}>Виплатні відомості</button>
                 <button className={`pageBlock-tab${type == 1 ? ' active' : ''}`} onClick={() => _type(1)}>Платіжні доручення</button>

@@ -489,7 +489,7 @@ select.authForm-input, select.searchForm-input {
 }
 
 .pageSidebar-wrap.animated > * {
-  transition: transform 200ms ease, visibility 200ms ease;
+  transition: transform 200ms, visibility 200ms;
 }
 
 .pageSidebar-mainMenu, .pageSidebar-subMenu {
@@ -551,6 +551,12 @@ select.authForm-input, select.searchForm-input {
   padding: 6px 0;
 }
 
+.page-header {
+  font-size: 20px;
+  font-weight: 500;
+  padding: 9px 0 16px;
+}
+
 .pageBlock {
   background-color: #fff;
   border-radius: 12px;
@@ -568,7 +574,6 @@ select.authForm-input, select.searchForm-input {
   font-size: 18px;
   font-weight: 500;
   padding: 12px 0;
-  font-family: var(--eUkraineHead);
 }
 
 .pageBlock-tabs {
