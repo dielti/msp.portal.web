@@ -18,7 +18,7 @@ export default () => {
     return <div className="pageHeader-wrap">
         <div className="pageHeader-content">
             <Link href='/' className="pageHeader-logo">
-                <img style={{ height: 'inherit' }} src="/images/msp_logo2.png" />
+                <img style={{ height: 'inherit' }} src="/images/msp_logo3.png" />
             </Link>
             <div style={{ flexGrow: 1 }} />
             <div className="pageHeader-personal">
