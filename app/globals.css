@@ -681,6 +681,8 @@ select.authForm-input, select.searchForm-input {
 .searchResults-head {
   background-color: #5f6379;
   color: #fff;
+  font-size: 11px;
+  font-weight: 500;
 }
 
 .searchResults-head th {
@@ -697,21 +699,54 @@ select.authForm-input, select.searchForm-input {
   padding: 0 15px;
 }
 
-.searchResults-body tr {
+.searchResults-body>tr {
   height: 85px;
   cursor: pointer;
-  font-size: 13px;
+  font-size: 11px;
+  font-weight: 500;
 }
 
-.searchResults-body tr:hover {
+.searchResults-body>tr.active {
+  background-color: #555868!important;
+  color: #fff;
+}
+
+tr.active svg {
+  transform: rotate(180deg);
+}
+
+tr.details {
+  cursor: default;
+}
+
+.detailsTable {
+  text-align: left;
+  font-size: 11px;
+  font-weight: 500;
+}
+
+.detailsTable td {
+  padding: 12px 2px 6px 32px;
+}
+
+.detailsTable td:nth-child(1) {
+  width: 345px;
+  border-right: solid 1px var(--separator-reg);
+}
+
+tr svg {
+  transition: transform 200ms;
+}
+
+.searchResults-body>tr:not(.details):hover {
   background-color: #e8ecff;
 }
 
-.searchResults-body tr:not(:last-child) {
+.searchResults-body>tr:not(:last-child) {
   border-bottom: solid 1px var(--separator-reg);
 }
 
-.searchResults-body td {
+.searchResults-body>tr:not(.details)>td {
   padding: 0 12px;
 }
 
