@@ -23,8 +23,8 @@ a {
 }
 
 h1 {
-  font-size: 20px;
-  font-weight: 500;
+  font-size: 22px;
+  font-weight: 400;
   line-height: 24px;
 }
 
@@ -71,6 +71,12 @@ fieldset {
   color: #fff;
 }
 
+.centralLogo {
+  display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 .pageShadowWrap {
   position: fixed;
   height: 100%;
@@ -90,7 +96,7 @@ fieldset {
 
 .pageFooter-wrap {
   width: 100%;
-  height: 110px;
+  height: 80px;
 }
 
 .pageFooter-content {
@@ -98,7 +104,7 @@ fieldset {
   width: var(--page-width);
   height: 100%;
   margin: 0 auto;
-  padding: 46px 40px 16px;
+  padding: 16px 40px;
   line-height: 20px;
   color: #e0e0e0;
   display: flex;
@@ -151,7 +157,7 @@ fieldset {
 }
 
 .setLH {
-  --layout-height: 428px;
+  --layout-height: 330px;
 }
 
 .pageHeader-wrap.withExt:not(.forced) .pageHeader-content {
@@ -401,7 +407,7 @@ select.searchForm-input {
 }
 
 .pageHeader-extWrap {
-  height: 318px;
+  height: 250px;
   z-index: 4;
   width: 100%;
   position: absolute;

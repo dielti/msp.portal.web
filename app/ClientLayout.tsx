@@ -22,10 +22,10 @@ export default ({ children, auth }: { children: React.ReactNode, auth: boolean }
                     <Header />
                     {headerExt && <div className="pageHeader-extWrap">
                         <div className="pageHeader-extContent">
-                            <img width={300} src='/images/msp_logo_vert.png' />
+                            <img className="centralLogo" height={250} src='/images/msp_logo_vert.png' />
                         </div>
                     </div>}
-                    <div {...(headerExt && { style: { marginTop: 318 } })} className="pageBody">
+                    <div {...(headerExt && { style: { marginTop: 250 } })} className="pageBody">
                         {children}
                     </div>
                     <div className="pageFooter-wrap">
