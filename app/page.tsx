@@ -14,7 +14,7 @@ export default () => {
     return () => _ext(!1)
   }, [])
   return <div style={{ flex: 1, overflow: 'hidden' }}>
-    <div className="pageSubBlock digBg">
+    <div className="pageBlock">
       <div className='page-header'>Електронний портал соціальних послуг</div>
       <div style={{fontSize: 20, fontWeight: 300, margin: '0 50% 0 24px'}}>Сервіс, що дозволяє вам поринутися у світ соціальних послуг. Цим сервісом можуть користуватися фізичні особи, юридичні особи ти представники банків</div>
     </div>

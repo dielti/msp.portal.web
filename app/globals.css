@@ -176,7 +176,7 @@ fieldset {
   color: #000;
   line-height: 16px;
   font-size: 14px;
-  margin-left: 20px;
+  margin-left: 6px;
   transition: 200ms ease-in-out;
   z-index: 1;
 }
@@ -412,6 +412,7 @@ select.searchForm-input {
 .pageHeader-pdTrigger {
   height: 48px;
   margin: 6px 0;
+  margin-left: 6px;
   border-radius: 8px;
   display: flex;
   align-items: center;
@@ -630,17 +631,21 @@ select.searchForm-input {
 }
 
 .pageSubBlock {
-  /* background-color: var(--page-block); */
-  background-color: #fff;
+  background-color: var(--page-block);
   padding: 15px 0;
 }
 
-.pageBlock {
+/* .pageBlock {
   background-color: #fff;
   border-radius: 12px;
   box-shadow: 0 0 0 1px var(--separator-reg);
   overflow: hidden;
   margin: 1px;
+} */
+
+.pageBlock {
+  background-color: #fff;
+  padding: 15px 0;
 }
 
 .pageBlock-head {
