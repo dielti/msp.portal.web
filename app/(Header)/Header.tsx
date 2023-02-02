@@ -35,7 +35,7 @@ export default () => {
             </Link>
             <div style={{ flexGrow: 1 }} />
             <div className="pageHeader-personal">
-                <button className="accButton">{accessibility}Для людей з<br/>порушенням зору</button>
+                <button className="accButton animatedButton">{accessibility}Для людей з<br/>порушенням зору</button>
                 {loaded && (user ? <AuthBlock /> : <NoAuthBlock />)}
             </div>
         </div>

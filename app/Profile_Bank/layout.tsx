@@ -6,7 +6,7 @@ export default ({ children }: { children: any }) => {
     const auth = cookies().get('at')?.value
     if (!auth) redirect('/')
     return <>
-        <Sidebar />
-        <div style={{ flex: 1 }}>{children}</div>
+        {/* <Sidebar /> */}
+        <div style={{ flex: 1, backgroundColor: 'var(--page-block)' }}>{children}</div>
     </>
 }

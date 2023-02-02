@@ -104,7 +104,7 @@ export default ({ open, close }: { open: boolean, close: () => void }) => {
                                 </div>
                                 <label className="animatedPlaceholder">Оберіть файл ключа</label>
                                 <input className="form-fileInput" type="file" {...rest} ref={e => { ref(e); e && (uploadButton.current = e) }} onChange={(e) => _fileName((e.target.files && e.target.files[0].name) || '')} />
-                                <button type="button" onClick={() => {uploadButton.current?.click() }} className="form-uploadButton">Обрати</button>
+                                <button type="button" onClick={() => {uploadButton.current?.click() }} className="form-uploadButton animatedButton">Обрати</button>
                                 <div className="authForm-error" role="alert">{errors.keyFile && errors.keyFile.message}</div>
                             </fieldset>
                             <fieldset className="authForm-fieldset">
@@ -114,7 +114,7 @@ export default ({ open, close }: { open: boolean, close: () => void }) => {
                                 <div className="authForm-error" role="alert">{errors.password && errors.password.message}</div>
                             </fieldset>
                             <fieldset style={{padding: '0 110px'}} className="authForm-fieldset">
-                                <button type="submit" className="authForm-submitButton">Увійти</button>
+                                <button type="submit" className="authForm-submitButton animatedButton">Увійти</button>
                             </fieldset>
                         </div>,
                         1: <div>...авторизація за токеном</div>

@@ -18,6 +18,7 @@ export default ({ children, auth }: { children: React.ReactNode, auth: boolean }
         <UserContext.Provider value={auth}>
             <HeaderExtContext.Provider value={[headerExt, _headerExt]}>
                 <div className={headerExt ? `setLH` : ''}>
+                    <div className="pageShadowWrap"><div className="pageShadow"/></div>
                     <Header />
                     {headerExt && <div className="pageHeader-extWrap">
                         <div className="pageHeader-extContent">
