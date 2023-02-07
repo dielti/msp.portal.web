@@ -1146,6 +1146,10 @@ tr svg {
     flex: 0 0 100%;
   }
 
+  .mw600 {
+    max-width: 600px;
+  }
+
   .searchField-text {
     text-align: center;
   }

@@ -30,7 +30,7 @@ export default ({ children, auth }: { children: React.ReactNode, auth: boolean }
                             </div>
                             <div className="pageHeader-extTitle">Електронний портал соціальних послуг</div>
                             <form className="pageHeader-searchForm">
-                                <div className="col-md-6">
+                                <div className="col-md-6 mw600">
                                     <div className="searchField-wrap">
                                         <div className="searchField-inputWrap">
                                             <input type="search" placeholder='Назва послуги' className="searchField-input"/>
