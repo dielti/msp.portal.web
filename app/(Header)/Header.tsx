@@ -20,7 +20,7 @@ export default () => {
     useEffect(() => {
         if (ext) {
             const onScroll = () => {
-                _forcedHeader(window.scrollY > 190)
+                _forcedHeader(window.scrollY > 360)
             }
             onScroll()
             window.addEventListener('scroll', onScroll)

@@ -6,6 +6,8 @@ import Header from "./(Header)/Header"
 import { HeaderExtContext, LoadedContext, UserContext } from "./Contexts"
 import Sidebar from "./Sidebar"
 import { usePathname } from "next/navigation"
+import TextField from "./(FormComponents)/TextField"
+import Link from "next/link"
 
 export default ({ children, auth }: { children: React.ReactNode, auth: boolean }) => {
     const [loaded, _loaded] = useState(!1),
@@ -18,14 +20,29 @@ export default ({ children, auth }: { children: React.ReactNode, auth: boolean }
         <UserContext.Provider value={auth}>
             <HeaderExtContext.Provider value={[headerExt, _headerExt]}>
                 <div className={headerExt ? `setLH` : ''}>
-                    <div className="pageShadowWrap"><div className="pageShadow"/></div>
+                    <div className="pageShadowWrap"><div className="pageShadow" /></div>
                     <Header />
                     {headerExt && <div className="pageHeader-extWrap">
                         <div className="pageHeader-extContent">
-                            <img className="centralLogo" height={250} src='/images/msp_logo_vert.png' />
+                            <div className="pageHeader-extLogoWrap">
+                                <div className="pageHeader-extHerb" />
+                                <div className="pageHeader-extLogo" />
+                            </div>
+                            <div className="pageHeader-extTitle">Електронний портал соціальних послуг</div>
+                            <form className="pageHeader-searchForm">
+                                <div className="col-md-6">
+                                    <div className="searchField-wrap">
+                                        <div className="searchField-inputWrap">
+                                            <input type="search" placeholder='Назва послуги' className="searchField-input"/>
+                                            <input type="submit" value='' className="clear-btn searchField-submit"/>
+                                        </div>
+                                        <div className="searchField-text">Наприклад: <Link className="inline-link" href="/Profile_Bank">Кабінет спеціаліста банку</Link></div>
+                                    </div>
+                                </div>
+                            </form>
                         </div>
                     </div>}
-                    <div {...(headerExt && { style: { marginTop: 250 } })} className="pageBody">
+                    <div {...(headerExt && { style: { marginTop: 420 } })} className="pageBody">
                         {children}
                     </div>
                     <div className="pageFooter-wrap">
