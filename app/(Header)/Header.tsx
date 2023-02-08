@@ -15,12 +15,14 @@ export default () => {
     const loaded = useContext(LoadedContext),
         user = useContext(UserContext),
         [ext] = useContext(HeaderExtContext),
-        [forcedHeader, _forcedHeader] = useState(!1)
+        [forcedHeader, _forcedHeader] = useState(!1),
+        [translate, _translate] = useState(0)
 
     useEffect(() => {
         if (ext) {
             const onScroll = () => {
-                _forcedHeader(window.scrollY > 360)
+                window.scrollY > 420 && _translate(window.scrollY < 480 ? 480-window.scrollY : 0)
+                _forcedHeader(window.scrollY > 420)
             }
             onScroll()
             window.addEventListener('scroll', onScroll)
@@ -28,10 +30,15 @@ export default () => {
         }
     },[ext])
 
-    return <div className={`pageHeader-wrap${ext ? ' withExt' : ''}${forcedHeader ? ' forced' : ''}`}>
+    return <div {...(forcedHeader && {style: {transform: `translateY(-${translate}px)`}})} className={`pageHeader-wrap${ext ? ' withExt' : ''}${forcedHeader ? ' forced' : ''}`}>
         <div className='pageHeader-content'>
             <Link href='/' className="pageHeader-logo">
-                <img style={{ height: 'inherit' }} src="/images/msp_logo3.png" />
+                <div className="pageHeader-herb"/>
+                <div className="pageHeader-title">
+                    <span className="pageHeader-mspTitle">Міністерство соціальної політики України</span>
+                    <span className="pageHeader-ekTitle">Електронний кабінет соціальних послуг</span>
+                </div>
+                {/* <img style={{ height: 'inherit' }} src="/images/msp_logo3.png" /> */}
             </Link>
             <div style={{ flexGrow: 1 }} />
             <div className="pageHeader-personal">
