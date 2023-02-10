@@ -55,11 +55,11 @@ export default ({ children, auth }: { children: React.ReactNode, auth: boolean }
                                 <tbody>
                                     <tr>
                                         <td><a href='mailto:info@mlsp.gov.ua'>info@mlsp.gov.ua</a></td>
-                                        <td><span className="small">тел.</span>(044) 289-86-22</td>
+                                        <td><a href='tel:+38-044-289-86-22'><span className="small">тел.</span>(044) 289-86-22</a></td>
                                     </tr>
                                     <tr>
                                         <td>м. Київ, вул. Еспланадна, 8/10</td>
-                                        <td><span className="small">тел.</span>(044) 289-70-60</td>
+                                        <td><a href='tel:+38-044-289-70-60'><span className="small">тел.</span>(044) 289-70-60</a></td>
                                     </tr>
                                 </tbody>
                             </table>

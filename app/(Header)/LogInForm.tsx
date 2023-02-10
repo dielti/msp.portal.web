@@ -6,7 +6,7 @@ import Modal from "../Modal"
 import { useForm } from 'react-hook-form'
 import caList from './caList'
 import { setCookie } from "cookies-next"
-import {useRouter} from 'next/navigation'
+import { useRouter } from 'next/navigation'
 
 type FormValues = {
     password: string;
@@ -16,33 +16,33 @@ type FormValues = {
 }
 
 const typeLoginPers = [
-{
-    Id: 'P',
-    Name: 'Надавач соціальних послуг'
-},
-{
-    Id: 'C',
-    Name: 'Фізична особа - отримувач соціальних послуг'
-},
-{
-    Id: 'B',
-    Name: 'Спеціаліст банку'
-},
-{
-    Id: 'V',
-    Name: 'Спеціаліст органів виконавчої влади'
-}
-/*{
-    Id: 'D',
-    Name: 'Лікар або уповноважена особа ЗОЗ'
-},
-{
-    Id: 'Z',
-    Name: "Адміністратор ЗОЗ"
-},*/
+    {
+        Id: 'P',
+        Name: 'Надавач соціальних послуг'
+    },
+    {
+        Id: 'C',
+        Name: 'Фізична особа - отримувач соціальних послуг'
+    },
+    {
+        Id: 'B',
+        Name: 'Спеціаліст банку'
+    },
+    {
+        Id: 'V',
+        Name: 'Спеціаліст органів виконавчої влади'
+    }
+    /*{
+        Id: 'D',
+        Name: 'Лікар або уповноважена особа ЗОЗ'
+    },
+    {
+        Id: 'Z',
+        Name: "Адміністратор ЗОЗ"
+    },*/
 ]
 
-export default ({ open, close }: { open: boolean, close: () => void }) => {
+export default ({ open, close, onLogIn }: { open: boolean, close: () => void, onLogIn?: () => void }) => {
     const [type, _type] = useState(0),
         { register, getValues, handleSubmit, setError, formState: { errors }, reset } = useForm<FormValues>({ mode: 'onSubmit' }),
         [pswVisible, _pswVisible] = useState(!1),
@@ -53,14 +53,15 @@ export default ({ open, close }: { open: boolean, close: () => void }) => {
         onSubmit = async (body: FormValues) => {
             setCookie('at', 1)
             await router.replace('/Profile_Bank');
+            onLogIn && onLogIn();
             router.refresh()
         }
 
-        useEffect(() => {
-            reset()
-            _fileName('')
-            _pswVisible(!1)
-        }, [open])
+    useEffect(() => {
+        reset()
+        _fileName('')
+        _pswVisible(!1)
+    }, [open])
 
     return <Modal cn="modal-authForm" open={open} closeModal={close}>
         <div className="authForm-wrap">
@@ -99,12 +100,12 @@ export default ({ open, close }: { open: boolean, close: () => void }) => {
                                 <div className="authForm-error" role="alert">{errors.acsk && errors.acsk.message}</div>
                             </fieldset>
                             <fieldset className="authForm-fieldset">
-                                <div onClick={() => {uploadButton.current?.click()}} is-empty="false" style={{ paddingRight: 80 }} className="authForm-input animatedInput">
+                                <div onClick={() => { uploadButton.current?.click() }} is-empty="false" style={{ paddingRight: 80 }} className="authForm-input animatedInput">
                                     <span>{fileName}</span>
                                 </div>
                                 <label className="animatedPlaceholder">Оберіть файл ключа</label>
                                 <input className="form-fileInput" type="file" {...rest} ref={e => { ref(e); e && (uploadButton.current = e) }} onChange={(e) => _fileName((e.target.files && e.target.files[0].name) || '')} />
-                                <button type="button" onClick={() => {uploadButton.current?.click() }} className="form-uploadButton animatedButton">Обрати</button>
+                                <button type="button" onClick={() => { uploadButton.current?.click() }} className="form-uploadButton animatedButton">Обрати</button>
                                 <div className="authForm-error" role="alert">{errors.keyFile && errors.keyFile.message}</div>
                             </fieldset>
                             <fieldset className="authForm-fieldset">
@@ -113,7 +114,7 @@ export default ({ open, close }: { open: boolean, close: () => void }) => {
                                 <button type="button" onClick={() => _pswVisible(v => !v)} className="authForm-visToggle">{pswVisible ? visOff : vis}</button>
                                 <div className="authForm-error" role="alert">{errors.password && errors.password.message}</div>
                             </fieldset>
-                            <fieldset style={{padding: '0 110px'}} className="authForm-fieldset">
+                            <fieldset style={{ padding: '0 110px' }} className="authForm-fieldset">
                                 <button type="submit" className="authForm-submitButton animatedButton">Увійти</button>
                             </fieldset>
                         </div>,
