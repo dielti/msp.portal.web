@@ -29,7 +29,7 @@
   }
 }
 
-@media all and (max-width: 1200px) {
+@media all and (max-width: 1680px) {
   :root {
     --page-width: 100%;
   }

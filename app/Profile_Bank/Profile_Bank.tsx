@@ -48,16 +48,16 @@ export default () => {
     }, [type])
 
     return <>
-        <div className="pageSubBlock"><div className="page-header">Кабінет спеціаліста банку</div></div>
+        <div className="pageSubBlock" style={{padding: '15px 20px'}}><div className="page-header">Кабінет спеціаліста банку - виплатні відомості</div></div>
         <div className="pageBlock mt0">
             <div className="pageBlock-head">
                 <div className="pageBlock-header">Параметри пошуку</div>
-                <div className="pageBlock-tabs">
+                {/* <div className="pageBlock-tabs">
                     <button className={`pageBlock-tab${type == 0 ? ' active' : ''}`} onClick={() => _type(0)}>Виплатні відомості</button>
                     <button className={`pageBlock-tab${type == 1 ? ' active' : ''}`} onClick={() => _type(1)}>Платіжні доручення</button>
                     <button className={`pageBlock-tab${type == 2 ? ' active' : ''}`} onClick={() => _type(2)}>Повернення коштів</button>
                     <div style={{ transform: `translateX(${100 * type}%)`, width: '33.33%' }} className="pageBlock-slider" />
-                </div>
+                </div> */}
             </div>
             <div style={{ marginTop: 0 }} className="pageBlock-body">
                 <form ref={formRef} onSubmit={handleSubmit(onSubmit)}>
@@ -87,7 +87,7 @@ export default () => {
                             <div className="col-md-6">
                                 <TextField label='Ідентифікатор пакета' />
                             </div>
-                            <fieldset className="searchForm-fieldset searchForm-buttons">
+                            <fieldset className="searchForm-buttons">
                                 <button type='submit' className="searchForm-button animatedButton">{search}Пошук</button>
                             </fieldset>
                         </div>,
@@ -118,7 +118,7 @@ export default () => {
                             <div className="col-md-6">
                                 <SelectField label='Статус реєстра повернених коштів' options={[{ value: 1, caption: 'Завантажено' }, { value: 2, caption: 'Знайдено ПД' }, { value: 3, caption: 'Помилка суми' }, { value: 4, caption: 'Оброблено' }]} emptyDefault={!0} />
                             </div>
-                            <fieldset className="searchForm-fieldset searchForm-buttons">
+                            <fieldset className="searchForm-buttons">
                                 <button type="button" className="searchForm-button animatedButton" style={{ width: 186 }}>{upload}Додати файл</button>
                                 <button type='submit' className="searchForm-button animatedButton">{search}Пошук</button>
                             </fieldset>
