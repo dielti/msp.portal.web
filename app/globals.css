@@ -1124,6 +1124,7 @@ select.searchForm-input {
   background-color: rgba(0, 0, 0, 0.3);
   background-image: var(--diia-highlight);
   background-size: 200% 300%;
+  background-attachment: fixed;
   -webkit-animation: 10s infinite granimate;
   animation: 10s infinite granimate;
   color: #fff;
