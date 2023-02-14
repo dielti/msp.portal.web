@@ -5,8 +5,8 @@ import dynamic from "next/dynamic"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { useContext, useEffect, useLayoutEffect, useState } from "react"
-import { HeaderExtContext, LoadedContext, UserContext } from "../Contexts"
-import { accessibility, account, logOut as logOutIcon, close, menu } from "../icons"
+import { AccessibilityContext, HeaderExtContext, LoadedContext, UserContext } from "../Contexts"
+import { account, logOut as logOutIcon, close, menu, badVision, goodVision } from "../icons"
 
 //@ts-ignore
 const NoAuthBlock = dynamic(() => import('./NoAuthBlock'), { ssr: false })
@@ -17,6 +17,7 @@ export default () => {
     const loaded = useContext(LoadedContext),
         user = useContext(UserContext),
         [ext] = useContext(HeaderExtContext),
+        [accessibility, _accessibility] = useContext(AccessibilityContext),
         [menuOpen, _menuOpen] = useState(!1),
         [forcedHeader, _forcedHeader] = useState(!1),
         [translate, _translate] = useState(0),
@@ -50,7 +51,7 @@ export default () => {
             </Link>
             <div style={{ flexGrow: 1 }} />
             <div className="pageHeader-personal">
-                {/* <button className="accButton animatedButton">{accessibility}Для людей з<br/>порушенням зору</button> */}
+                <button onClick={() => _accessibility((v: boolean) => !v)} className="accButton animatedButton">{accessibility ? badVision : goodVision}Для людей з<br />порушенням зору</button>
                 {loaded && (user ? <AuthBlock /> : <NoAuthBlock />)}
                 <button onClick={() => _menuOpen(v => !v)} className="pageHeader-menuTrigger">{menu}</button>
             </div>
@@ -58,16 +59,21 @@ export default () => {
     </div>
         <div className={`pageHeader-menu${menuOpen ? ' open' : ''}`}>
             <div className="pageHeader-menuTop">
-                <Link className="pageHeader-menuLogoWrap" href='/'>
+                <Link onClick={() => _menuOpen(!1)} className="pageHeader-menuLogoWrap" href='/'>
                     <div className="pageHeader-menuHerb" />
                     <div className="pageHeader-menuLogo">Міністерство<br />соціальної політики<br />України</div>
                 </Link>
                 <button className="pageHeader-menuClose" onClick={() => _menuOpen(!1)}>{close}</button>
             </div>
+            <div className="pageHeader-menuMid">
+                <Link onClick={() => _menuOpen(!1)} href="/">Головна</Link>
+                <Link onClick={() => _menuOpen(!1)} href="https://www.msp.gov.ua/">Сайт МСП</Link>
+                <button onClick={() => _accessibility((v: boolean) => !v)}>{accessibility ? badVision : goodVision}Людям із порушенням зору</button>
+            </div>
             <div className="pageHeader-menuPersonal">
                 {user ? <><div className="pageHeader-menuTitle"><span>Ви авторизовані як <strong>Анжела Петрівна</strong></span></div>
                     <Link className="pageHeader-menuButton" onClick={() => _menuOpen(!1)} href='/Profile_Bank'>{account}<span>Мій кабінет</span></Link>
-                    <button className="pageHeader-menuLogout animatedButton" onClick={() => { _menuOpen(!1); logOut() }}>{logOutIcon}<span>Вихід</span></button></> : <NoAuthBlock onLogIn={() => _menuOpen(!1)}/>}
+                    <button className="pageHeader-menuLogout animatedButton" onClick={() => { _menuOpen(!1); logOut() }}>{logOutIcon}<span>Вихід</span></button></> : <NoAuthBlock onLogIn={() => _menuOpen(!1)} />}
             </div>
         </div>
     </>

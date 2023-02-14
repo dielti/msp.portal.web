@@ -67,8 +67,8 @@ export default ({ open, close, onLogIn }: { open: boolean, close: () => void, on
         <div className="authForm-wrap">
             <div className="authForm-head">
                 <button className="authForm-closeButton" onClick={close} >{clear}</button>
-                <img src="/images/msp_logo_mini.png" className="authForm-logo" />
-                <h1 style={{ color: '#e3e3e3' }} className="formHeader"><span>Увійти до системи</span></h1>
+                <div className="authForm-herb"/>
+                <h1 className="formHeader"><span>Увійти до системи</span></h1>
                 <div className="authForm-typeTabs">
                     <a onClick={(e) => { e.preventDefault(); _type(0) }} href='#' className={`authForm-typeTab${type == 0 ? ' active' : ''}`}>За КЕП</a>
                     <a onClick={(e) => { e.preventDefault(); _type(1) }} href='#' className={`authForm-typeTab${type == 1 ? ' active' : ''}`}>За токеном</a>
@@ -80,37 +80,45 @@ export default ({ open, close, onLogIn }: { open: boolean, close: () => void, on
                     {{
                         0: <div>
                             <fieldset className="authForm-fieldset">
-                                <select is-empty="false" className="authForm-input animatedInput" {...register('typePerson')}>
-                                    {typeLoginPers.map(({ Id, Name }, key) => <option value={Id} key={key}>
-                                        {Name}
-                                    </option>)}
-                                </select>
-                                <label className="animatedPlaceholder">Увійти як</label>
+                                <div className="searchForm-inputWrap">
+                                    <select className="searchForm-input" {...register('typePerson')}>
+                                        {typeLoginPers.map(({ Id, Name }, key) => <option value={Id} key={key}>
+                                            {Name}
+                                        </option>)}
+                                    </select>
+                                </div>
+                                <label className="searchForm-label">Увійти як</label>
                                 <div className="authForm-icon">{expand}</div>
                             </fieldset>
                             <fieldset className="authForm-fieldset">
-                                <select defaultValue='' is-empty="false" className="authForm-input animatedInput" {...register('acsk', { required: 'Необхідно вибрати АЦСК' })}>
-                                    <option disabled value='' />
-                                    {caList.map(({ issuerCNs: [Name], address: Id }, key) => <option value={Id} key={key}>
-                                        {Name}
-                                    </option>)}
-                                </select>
-                                <label className="animatedPlaceholder">Виберіть АЦСК</label>
+                                <div className="searchForm-inputWrap">
+                                    <select defaultValue='' className="searchForm-input" {...register('acsk', { required: 'Необхідно вибрати АЦСК' })}>
+                                        <option disabled value='' />
+                                        {caList.map(({ issuerCNs: [Name], address: Id }, key) => <option value={Id} key={key}>
+                                            {Name}
+                                        </option>)}
+                                    </select>
+                                </div>
+                                <label className="searchForm-label">Виберіть АЦСК</label>
                                 <div className="authForm-icon">{expand}</div>
                                 <div className="authForm-error" role="alert">{errors.acsk && errors.acsk.message}</div>
                             </fieldset>
                             <fieldset className="authForm-fieldset">
-                                <div onClick={() => { uploadButton.current?.click() }} is-empty="false" style={{ paddingRight: 80 }} className="authForm-input animatedInput">
-                                    <span>{fileName}</span>
+                                <div className="searchForm-inputWrap">
+                                    <div onClick={() => { uploadButton.current?.click() }} style={{ paddingRight: 80 }} className="searchForm-input">
+                                        <span>{fileName}</span>
+                                    </div>
                                 </div>
-                                <label className="animatedPlaceholder">Оберіть файл ключа</label>
+                                <label className="searchForm-label">Оберіть файл ключа</label>
                                 <input className="form-fileInput" type="file" {...rest} ref={e => { ref(e); e && (uploadButton.current = e) }} onChange={(e) => _fileName((e.target.files && e.target.files[0].name) || '')} />
                                 <button type="button" onClick={() => { uploadButton.current?.click() }} className="form-uploadButton animatedButton">Обрати</button>
                                 <div className="authForm-error" role="alert">{errors.keyFile && errors.keyFile.message}</div>
                             </fieldset>
                             <fieldset className="authForm-fieldset">
-                                <input is-empty='false' type={pswVisible ? "text" : "password"} placeholder='Пароль ключа' className="authForm-input animatedInput" {...register('password', { required: 'Необхідно ввести пароль' })} />
-                                <label className="animatedPlaceholder">Пароль ключа</label>
+                                <div className="searchForm-inputWrap">
+                                    <input type={pswVisible ? "text" : "password"} className="searchForm-input" {...register('password', { required: 'Необхідно ввести пароль' })} />
+                                </div>
+                                <label className="searchForm-label">Пароль ключа</label>
                                 <button type="button" onClick={() => _pswVisible(v => !v)} className="authForm-visToggle">{pswVisible ? visOff : vis}</button>
                                 <div className="authForm-error" role="alert">{errors.password && errors.password.message}</div>
                             </fieldset>
