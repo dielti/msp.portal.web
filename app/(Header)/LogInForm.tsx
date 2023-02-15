@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useRef, useState } from "react"
-import { clear, expand, vis, visOff } from "../icons"
+import { clear, expand, refresh, vis, visOff } from "../icons"
 import Modal from "../Modal"
 import { useForm } from 'react-hook-form'
 import caList from './caList'
@@ -13,6 +13,7 @@ type FormValues = {
     typePerson: string;
     acsk: string;
     keyFile: FileList;
+    new: string;
 }
 
 const typeLoginPers = [
@@ -44,7 +45,7 @@ const typeLoginPers = [
 
 export default ({ open, close, onLogIn }: { open: boolean, close: () => void, onLogIn?: () => void }) => {
     const [type, _type] = useState(0),
-        { register, getValues, handleSubmit, setError, formState: { errors }, reset } = useForm<FormValues>({ mode: 'onSubmit' }),
+        { register, setValue, handleSubmit, setError, formState: { errors }, reset } = useForm<FormValues>({ mode: 'onSubmit' }),
         [pswVisible, _pswVisible] = useState(!1),
         [fileName, _fileName] = useState(''),
         router = useRouter(),
@@ -67,7 +68,7 @@ export default ({ open, close, onLogIn }: { open: boolean, close: () => void, on
         <div className="authForm-wrap">
             <div className="authForm-head">
                 <button className="authForm-closeButton" onClick={close} >{clear}</button>
-                <div className="authForm-herb"/>
+                <div className="authForm-herb" />
                 <h1 className="formHeader"><span>Увійти до системи</span></h1>
                 <div className="authForm-typeTabs">
                     <a onClick={(e) => { e.preventDefault(); _type(0) }} href='#' className={`authForm-typeTab${type == 0 ? ' active' : ''}`}>За КЕП</a>
@@ -126,7 +127,63 @@ export default ({ open, close, onLogIn }: { open: boolean, close: () => void, on
                                 <button type="submit" className="authForm-submitButton animatedButton">Увійти</button>
                             </fieldset>
                         </div>,
-                        1: <div>...авторизація за токеном</div>
+                        1: <div>
+                            <fieldset className="authForm-fieldset">
+                                <div className="searchForm-inputWrap">
+                                    <select className="searchForm-input" {...register('typePerson')}>
+                                        {typeLoginPers.map(({ Id, Name }, key) => <option value={Id} key={key}>
+                                            {Name}
+                                        </option>)}
+                                    </select>
+                                </div>
+                                <label className="searchForm-label">Увійти як</label>
+                                <div className="authForm-icon">{expand}</div>
+                            </fieldset>
+                            <fieldset className="authForm-fieldset">
+                                <div className="searchForm-inputWrap">
+                                    <select defaultValue='' className="searchForm-input" {...register('acsk', { required: 'Необхідно вибрати АЦСК' })}>
+                                        <option disabled value='' />
+                                        {caList.map(({ issuerCNs: [Name], address: Id }, key) => <option value={Id} key={key}>
+                                            {Name}
+                                        </option>)}
+                                    </select>
+                                </div>
+                                <label className="searchForm-label">Виберіть АЦСК</label>
+                                <div className="authForm-icon">{expand}</div>
+                                <div className="authForm-error" role="alert">{errors.acsk && errors.acsk.message}</div>
+                            </fieldset>
+                            <fieldset className="authForm-fieldset">
+                                <div className="searchForm-inputWrap">
+                                    <select style={{borderRight: 'solid 59px transparent'}} defaultValue='' className="searchForm-input" {...register('new', { required: 'Необхідно вибрати тип носія' })}>
+                                        <option disabled value='' />
+                                        {caList.map(({ issuerCNs: [Name], address: Id }, key) => <option value={Id} key={key}>
+                                            {Name}
+                                        </option>)}
+                                    </select>
+                                </div>
+                                <label className="searchForm-label">Тип носія</label>
+                                <button type="button" onClick={() => {setValue('new', '')}} className="form-uploadButton animatedButton">{refresh}</button>
+                                <div className="authForm-icon" style={{marginRight: 59}}>{expand}</div>
+                                <div className="authForm-error" role="alert">{errors.new && errors.new.message}</div>
+                            </fieldset>
+                            <fieldset className="authForm-fieldset">
+                                <div className="searchForm-inputWrap">
+                                    <input className="searchForm-input" disabled />
+                                </div>
+                                <label className="searchForm-label">Найменування носія</label>
+                            </fieldset>
+                            <fieldset className="authForm-fieldset">
+                                <div className="searchForm-inputWrap">
+                                    <input type={pswVisible ? "text" : "password"} className="searchForm-input" {...register('password', { required: 'Необхідно ввести пароль' })} />
+                                </div>
+                                <label className="searchForm-label">Пароль</label>
+                                <button type="button" onClick={() => _pswVisible(v => !v)} className="authForm-visToggle">{pswVisible ? visOff : vis}</button>
+                                <div className="authForm-error" role="alert">{errors.password && errors.password.message}</div>
+                            </fieldset>
+                            <fieldset style={{ padding: '0 110px' }} className="authForm-fieldset">
+                                <button type="submit" className="authForm-submitButton animatedButton">Увійти</button>
+                            </fieldset>
+                        </div>
                     }[type]}
                 </form>
             </div>

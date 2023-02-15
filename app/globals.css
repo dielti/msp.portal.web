@@ -1056,7 +1056,7 @@ select.searchForm-input {
   background-color: var(--separator-reg);
 }
 
-.searchForm-inputWrap:focus-within {
+.searchForm-inputWrap:focus-within, .searchForm-inputWrap.active {
   background-image: var(--diia-highlight);
   background-size: 100% 20px;
 }

@@ -12,7 +12,7 @@ export default ({label}: {label: string}) => {
     const [open, _open] = useState(!1),
     [value, _value] = useState<Moment|null>(null)
 
-    return <fieldset className="searchForm-fieldset searchForm-inputWrap">
+    return <fieldset className={`searchForm-fieldset searchForm-inputWrap${open ? ' active' : ''}`}>
         <LocalizationProvider adapterLocale='uk' dateAdapter={AdapterMoment}>
             <DatePicker inputFormat='DD.MM.yyyy' onClose={() => _open(!1)} open={open} value={value} onChange={v => {console.log('change', v), _value(v)}} renderInput={({inputProps,inputRef}) => <input aria-label={label} ref={inputRef} className='searchForm-input' {...inputProps} placeholder='__.__.____'/>}/>
             <button type='button' onClick={() => _open(v => !v)} style={{paddingTop: 1}} className={`form-uploadButton animatedButton${open ? ' active' : ''}`}>{calendar}</button>
